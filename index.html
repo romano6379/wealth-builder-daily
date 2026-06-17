@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdSenseFlow Network - Blog Portal</title>
+  <link rel="stylesheet" href="blog.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="data/keywords.js"></script>
+  <script src="data/posts.js"></script>
+  <script src="data/site-config.js" onerror="window.siteConfig=null;"></script>
+</head>
+<body>
+
+  <!-- Blog Header -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo" id="site-logo">
+        AdSenseFlow <span>Network</span>
+      </a>
+
+      <!-- Demo Tool: Toggle Between the 15 Network Sites -->
+      <div class="site-selector-container">
+        <span style="font-size: 11px; color: var(--text-muted); font-weight: 700;">ACTIVE SITE:</span>
+        <select id="network-site-selector" class="site-select">
+          <!-- Populated dynamically -->
+        </select>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="admin.html" style="background: var(--secondary); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px;">Admin Panel</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main class="main-layout">
+    <!-- Left Column: Posts List -->
+    <section>
+      <!-- Categories Filter -->
+      <div class="category-filter" id="category-filter-container">
+        <button class="cat-btn active" data-category="all">All Articles</button>
+        <button class="cat-btn" data-category="finance">Smart Finance</button>
+        <button class="cat-btn" data-category="insurance">Insurance Hub</button>
+        <button class="cat-btn" data-category="legal">Legal Help</button>
+        <button class="cat-btn" data-category="tech">Tech & Tools</button>
+      </div>
+
+      <h1 style="font-size: 24px; font-weight: 800; margin-bottom: 24px;" id="blog-category-heading">Latest Guides & Resources</h1>
+
+      <!-- Posts Cards Grid -->
+      <div class="posts-grid" id="posts-container">
+        <!-- Loaded dynamically via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Right Column: Sidebar -->
+    <aside class="sidebar">
+      <!-- Search Widget -->
+      <div class="widget search-widget">
+        <h3 class="widget-title">Search Guides</h3>
+        <input type="text" id="blog-search-input" placeholder="Type keywords...">
+      </div>
+
+      <!-- Top High-CPC Ad Slot -->
+      <div class="adsense-placeholder sidebar-ad" id="sidebar-ad-slot">
+        <!-- Dynamic Ad Banner -->
+      </div>
+
+      <!-- Niche Stats Widget -->
+      <div class="widget">
+        <h3 class="widget-title">Niche Overview</h3>
+        <p style="font-size: 14px; color: var(--text-muted);" id="site-niche-description">
+          Loading site details...
+        </p>
+      </div>
+    </aside>
+  </main>
+
+  <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; background-color: white; margin-top: 60px;">
+    <p>&copy; 2026 <span id="footer-site-name">AdSenseFlow Network</span>. All rights reserved.</p>
+    <p style="margin-top: 8px; font-size: 11px;">This content is optimized for Google AdSense placements and search index ranking.</p>
+  </footer>
+
+  <!-- App logic script -->
+  <script>
+    // Global State
+    let posts = [];
+    let keywordsData = {};
+    let currentSite = "";
+
+    // Load DB Files
+    try {
+      const localPosts = JSON.parse(localStorage.getItem('local_generated_posts')) || [];
+      posts = [...localPosts, ...(window.postsData || [])];
+      keywordsData = window.keywordsData || {};
+      
+      initSelector();
+      loadSite(currentSite);
+    } catch (err) {
+      console.error("Error loading blog data:", err);
+    }
+
+    // Initialize Network Selector
+    function initSelector() {
+      const selector = document.getElementById('network-site-selector');
+      selector.innerHTML = "";
+      
+      // Get all 15 sites
+      const allSites = [];
+      Object.keys(keywordsData.user_assignments).forEach(user => {
+        keywordsData.user_assignments[user].sites.forEach(siteName => {
+          allSites.push({
+            name: siteName,
+            user: user,
+            niche: keywordsData.user_assignments[user].niche
+          });
+        });
+      });
+
+      // Default site selection
+      if (window.siteConfig && window.siteConfig.siteName) {
+        currentSite = window.siteConfig.siteName;
+        const selContainer = document.querySelector('.site-selector-container');
+        if (selContainer) selContainer.style.display = 'none';
+      } else {
+        currentSite = localStorage.getItem('activeNetworkSite') || allSites[0].name;
+      }
+
+      allSites.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.name;
+        opt.textContent = `${s.name} (${s.user})`;
+        if (s.name === currentSite) opt.selected = true;
+        selector.appendChild(opt);
+      });
+
+      selector.addEventListener('change', (e) => {
+        currentSite = e.target.value;
+        localStorage.setItem('activeNetworkSite', currentSite);
+        loadSite(currentSite);
+      });
+    }
+
+    // Load Specific Site Info and Posts
+    function loadSite(siteName) {
+      // Find site niche details
+      let siteNiche = "finance";
+      let siteUser = "User 1";
+      Object.keys(keywordsData.user_assignments).forEach(user => {
+        if (keywordsData.user_assignments[user].sites.includes(siteName)) {
+          siteNiche = keywordsData.user_assignments[user].niche;
+          siteUser = user;
+        }
+      });
+
+      // Update Branding
+      document.getElementById('site-logo').innerHTML = `${siteName.split(' ')[0]} <span>${siteName.split(' ').slice(1).join(' ') || 'Blog'}</span>`;
+      document.getElementById('footer-site-name').textContent = siteName;
+      document.getElementById('site-niche-description').innerHTML = `
+        <strong>Niche:</strong> ${siteNiche.toUpperCase()}<br>
+        <strong>Operator:</strong> ${siteUser} (US Resident)<br>
+        <strong>Focus:</strong> High-CPC ad targets in the English-speaking market.
+      `;
+
+      // Load Site Ads
+      renderSidebarAd(siteNiche);
+
+      // Render Posts
+      renderPosts(siteName);
+
+      // Add Category Event Listeners
+      const catButtons = document.querySelectorAll('.cat-btn');
+      catButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.category === 'all') btn.classList.add('active');
+        
+        btn.onclick = () => {
+          catButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderPosts(siteName, btn.dataset.category);
+        };
+      });
+
+      // Add Search Event Listener
+      const searchInput = document.getElementById('blog-search-input');
+      searchInput.oninput = (e) => {
+        const query = e.target.value.toLowerCase();
+        renderPosts(siteName, 'all', query);
+      };
+    }
+
+    // Render Posts Cards
+    function renderPosts(siteName, filterCategory = 'all', searchQuery = '') {
+      const container = document.getElementById('posts-container');
+      container.innerHTML = "";
+
+      // Filter by Site Name
+      let sitePosts = posts.filter(p => p.site === siteName);
+
+      // Filter by Category
+      if (filterCategory !== 'all') {
+        sitePosts = sitePosts.filter(p => p.category === filterCategory);
+      }
+
+      // Filter by Search Query
+      if (searchQuery) {
+        sitePosts = sitePosts.filter(p => p.title.toLowerCase().includes(searchQuery) || p.excerpt.toLowerCase().includes(searchQuery));
+      }
+
+      if (sitePosts.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 40px; border: 1px dashed var(--border); border-radius: var(--radius); background: white;">
+            <p style="color: var(--text-muted); font-size: 15px;">No articles posted on this site yet.</p>
+            <p style="font-size: 12px; margin-top: 10px; color: var(--text-muted)">Activate AutoPilot or use the Admin Panel to write one!</p>
+          </div>
+        `;
+        return;
+      }
+
+      sitePosts.forEach(post => {
+        const card = document.createElement('div');
+        card.className = "post-card";
+        card.innerHTML = `
+          <div class="post-card-body">
+            <span class="post-tag">${post.category}</span>
+            <a href="post.html?id=${post.id}" class="post-card-title">${post.title}</a>
+            <p class="post-excerpt">${post.excerpt}</p>
+            <div class="post-meta">
+              <span>By ${post.author || post.user || 'Editorial Staff'}</span>
+              <span>${post.readTime || '5 min read'}</span>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Render Simulated High-CPC Ad
+    function renderSidebarAd(niche) {
+      const adSlot = document.getElementById('sidebar-ad-slot');
+      
+      const ads = {
+        finance: {
+          title: "SBA Loan Rates are Dropping - Compare 2026 Business Loans",
+          desc: "Fast approval, low fixed rates for small business owners. Secure up to $500k in emergency government backing.",
+          url: "www.business-funding-guide.org"
+        },
+        insurance: {
+          title: "Lower Your Car Premium in Texas - Free 2-Min Rate Check",
+          desc: "Drivers saving an average of $620/year. Enter zip code to compare top 6 local insurers instantly.",
+          url: "www.texas-auto-rates.com"
+        },
+        legal: {
+          title: "Camp Lejeune Water Settlement Claims - Free Lawyer Consultation",
+          desc: "Veterans & family members diagnosed with cancer can claim substantial cash payouts. Act before deadline.",
+          url: "www.lejeunesettlement-legal.com"
+        },
+        tech: {
+          title: "Best Secure Cloud Hosting - Get 60% Off Business Plans",
+          desc: "Enterprise NVMe SSD hosting with automatic daily backups, DDoS protection & 24/7 expert developer support.",
+          url: "www.cloudstack-enterprise.com"
+        }
+      };
+
+      const ad = ads[niche] || ads.finance;
+      
+      adSlot.innerHTML = `
+        <div class="simulated-ad-title" onclick="alert('This is a simulated AdSense click. High CPC niche value: ${niche === 'legal' ? '$45.00' : '$15.00'}!')">
+          ${ad.title}
+        </div>
+        <div class="simulated-ad-desc">${ad.desc}</div>
+        <div class="simulated-ad-url">${ad.url}</div>
+      `;
+    }
+  </script>
+</body>
+</html>
