@@ -71,6 +71,9 @@
         </div>
       </div>
 
+      <!-- Dynamic Legal/Financial Disclaimer Box -->
+      <div class="niche-disclaimer-box" id="niche-disclaimer-container" style="display: none;"></div>
+
       <!-- Table of Contents Box -->
       <div class="toc-box">
         <div class="toc-title">Table of Contents</div>
@@ -180,6 +183,44 @@
 
       document.getElementById('art-title').textContent = post.title;
       document.getElementById('art-author').textContent = `By ${post.author || post.user || 'Editorial Staff'}`;
+
+      // Populate Niche-Specific Disclaimer Box
+      const disclaimerContainer = document.getElementById('niche-disclaimer-container');
+      if (disclaimerContainer) {
+        const disclaimers = {
+          legal: `
+            <strong>⚠️ Legal Notice & Risk Disclosure</strong>
+            U.S. litigation and dispute claims carry significant financial risks and strict procedural limits. 
+            The content on this portal is for general informational and educational purposes only and does NOT constitute formal legal advice or representation. 
+            No attorney-client relationship is formed by reading this website. 
+            Always consult a licensed attorney in your state before filing any legal claim or signing contractual agreements.
+          `,
+          finance: `
+            <strong>📊 Financial & Tax Advisory Disclosure</strong>
+            Personal finance and taxation strategies are subject to complex federal and state codes that change frequently. 
+            This guide is provided for educational and general information purposes only and does not constitute financial, investment, or tax advice. 
+            Past performance of programs or savings models does not guarantee future results. 
+            Always consult a Certified Financial Planner (CFP) or a Certified Public Accountant (CPA) before making major financial decisions.
+          `,
+          insurance: `
+            <strong>🛡️ Insurance Coverage Disclaimer</strong>
+            We are not a licensed insurance carrier, underwriter, or government agency. 
+            Insurance quotes, premiums, and policies vary significantly by individual eligibility, state laws, and local ZIP codes. 
+            This information is a market summary and does not constitute a binding quote. 
+            Always consult a licensed local insurance agent or broker before enrolling in Medicare or any private policy.
+          `,
+          tech: `
+            <strong>💻 Tech Implementation & Compliance Disclaimer</strong>
+            Software deployments, SaaS tools, and hosting setups carry security compliance risks. 
+            This material is for informational evaluations only. 
+            Verify software specifications, system security, and specific compliance mandates (SOC2, GDPR, HIPAA) with certified IT professionals before implementation.
+          `
+        };
+        const niche = post.category || 'finance';
+        disclaimerContainer.className = `niche-disclaimer-box ${niche}`;
+        disclaimerContainer.innerHTML = disclaimers[niche] || disclaimers.finance;
+        disclaimerContainer.style.display = 'block';
+      }
       
       const publishDate = new Date(post.date);
       document.getElementById('art-date').textContent = publishDate.toLocaleDateString('en-US', {
