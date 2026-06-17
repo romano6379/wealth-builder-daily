@@ -41,6 +41,58 @@
       "best email marketing software for e-commerce"
     ]
   },
+  "seasonal_keywords": {
+    "tax_season": {
+      "months": [1, 2, 3, 4],
+      "keywords": {
+        "finance": [
+          "how to check IRS tax refund status online",
+          "maximize small business tax deductions 2026",
+          "how to file tax extension form 4868",
+          "best tax filing software for self employed"
+        ],
+        "legal": [
+          "IRS tax audit representation lawyer cost",
+          "LLC tax write offs and legal compliance",
+          "unpaid back taxes settlement options IRS"
+        ]
+      }
+    },
+    "mid_year_school_insurance": {
+      "months": [5, 6, 7],
+      "keywords": {
+        "finance": [
+          "FAFSA student financial aid deadlines and requirements",
+          "how to apply for private student loans without cosigner",
+          "best student loan refinance rates 2026"
+        ],
+        "insurance": [
+          "low cost short term health insurance for graduates",
+          "compare best homeowners insurance rates for summer movers",
+          "do i need renters insurance for college dorm"
+        ]
+      }
+    },
+    "late_year_enrollment": {
+      "months": [10, 11, 12],
+      "keywords": {
+        "insurance": [
+          "medicare advantage plans open enrollment guide 2026",
+          "how to choose medicare part d drug coverage",
+          "obamacare affordable care act enrollment deadline"
+        ],
+        "legal": [
+          "class action lawsuit settlement claims deadlines end of year",
+          "corporate legal compliance audit checklist 2026",
+          "personal injury settlement tax rules in US"
+        ],
+        "finance": [
+          "smart year end tax planning strategies for high earners",
+          "best high yield savings accounts for holiday savings"
+        ]
+      }
+    }
+  },
   "user_assignments": {
     "User 1": {
       "niche": "finance",
