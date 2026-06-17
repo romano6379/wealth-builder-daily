@@ -1,0 +1,66 @@
+window.keywordsData = {
+  "categories": {
+    "finance": [
+      "first time home buyer grants california",
+      "best student loan forgiveness programs",
+      "sba loans for small business women",
+      "high yield savings account rates 2026",
+      "debt consolidation loans bad credit",
+      "fha loan requirements by state",
+      "how to build business credit fast",
+      "best cashback credit cards for families"
+    ],
+    "insurance": [
+      "how to lower car insurance premium texas",
+      "medicare advantage plans vs original medicare",
+      "general liability insurance cost for llc",
+      "commercial auto insurance quotes online",
+      "best private health insurance for self employed",
+      "homeowners insurance policy coverage explained",
+      "workers compensation insurance requirements",
+      "pet insurance that covers pre existing conditions"
+    ],
+    "legal": [
+      "how to join class action lawsuit 2026",
+      "personal injury claim process after car accident",
+      "mesothelioma compensation claims attorney",
+      "product liability lawyer free consultation",
+      "medical malpractice statute of limitations",
+      "workers comp attorney settlement chart",
+      "how to file wrongful termination claim",
+      "tenants rights lawyer free consultation near me"
+    ],
+    "tech": [
+      "best cloud hosting for wordpress business",
+      "cheapest secure cloud storage for enterprises",
+      "top crm software for real estate agents",
+      "shopify alternatives for small business",
+      "best vpn for remote team security",
+      "cybersecurity audit checklist for startups",
+      "ai tools for content marketing automation",
+      "best email marketing software for e-commerce"
+    ]
+  },
+  "user_assignments": {
+    "User 1": {
+      "niche": "finance",
+      "sites": ["Smart Wallet Guide", "Wealth Builder Daily", "Federal Aid Center"]
+    },
+    "User 2": {
+      "niche": "insurance",
+      "sites": ["Insurance Advisor US", "Premium Saver Blog", "Care Cover Digest"]
+    },
+    "User 3": {
+      "niche": "legal",
+      "sites": ["Justice Alert News", "Class Action Tracker", "Claim Rights Portal"]
+    },
+    "User 4": {
+      "niche": "tech",
+      "sites": ["SaaS Finder Lab", "Cloud Tech Review", "Secure Agency Blog"]
+    },
+    "User 5": {
+      "niche": "finance",
+      "sites": ["Side Income Engine", "Passive Income Academy", "Smart Dollar Hack"]
+    }
+  }
+};
