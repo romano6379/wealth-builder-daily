@@ -1,5 +1,5 @@
 /* blog.css - Ultra Premium, Modern & Minimalist Editorial Design System (US Style) */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap');
 
 :root {
   --font-headings: 'Plus Jakarta Sans', -apple-system, sans-serif;
@@ -568,3 +568,54 @@ h1, h2, h3, h4 {
   font-size: 14.5px !important;
   color: var(--text-muted);
 }
+
+/* --- Layout Variations for 15-Site Network --- */
+/* Clean Layout Style */
+body.layout-clean {
+  --radius-lg: 4px;
+  --radius-md: 4px;
+  --radius-sm: 2px;
+}
+body.layout-clean .post-card {
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 24px 0;
+  box-shadow: none;
+  background: transparent;
+}
+body.layout-clean .post-card:hover {
+  transform: none;
+  box-shadow: none;
+  border-bottom-color: var(--primary);
+}
+
+/* Classic Layout Style */
+body.layout-classic {
+  --radius-lg: 0px;
+  --radius-md: 0px;
+  --radius-sm: 0px;
+}
+body.layout-classic .post-card {
+  border: 2px solid var(--text-primary);
+  box-shadow: 4px 4px 0px var(--text-primary);
+}
+body.layout-classic .post-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--text-primary);
+}
+
+/* Serif Layout Style */
+body.layout-serif {
+  --font-body: 'Merriweather', Georgia, serif;
+}
+body.layout-serif .post-card {
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  background-color: #fff;
+}
+body.layout-serif .article-container {
+  font-family: 'Merriweather', Georgia, serif;
+  line-height: 1.9;
+}
+
