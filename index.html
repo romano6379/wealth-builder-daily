@@ -11,6 +11,29 @@
   <script src="data/keywords.js"></script>
   <script src="data/posts.js"></script>
   <script src="data/site-config.js" onerror="window.siteConfig=null;"></script>
+  <script>
+    // Apply Vercel Site-Specific Theme Config dynamically
+    if (window.siteConfig) {
+      const root = document.documentElement;
+      if (window.siteConfig.primaryColor) {
+        root.style.setProperty('--primary', window.siteConfig.primaryColor);
+        root.style.setProperty('--primary-glow', window.siteConfig.primaryColor + '1a');
+        root.style.setProperty('--border-focus', window.siteConfig.primaryColor);
+      }
+      if (window.siteConfig.bgMain) {
+        root.style.setProperty('--bg-main', window.siteConfig.bgMain);
+      }
+      if (window.siteConfig.fontHeading) {
+        root.style.setProperty('--font-headings', window.siteConfig.fontHeading);
+      }
+      // Add layout class after DOM content loaded
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.siteConfig.layoutStyle) {
+          document.body.classList.add('layout-' + window.siteConfig.layoutStyle);
+        }
+      });
+    }
+  </script>
 </head>
 <body>
 
@@ -87,12 +110,53 @@
     <p style="margin-top: 8px; font-size: 11px;">This content is optimized for Google AdSense placements and search index ranking.</p>
   </footer>
 
-  <!-- App logic script -->
   <script>
     // Global State
     let posts = [];
     let keywordsData = {};
     let currentSite = "";
+
+    // 15개 사이트별 고유 디자인 테마 설정 (로컬 데모/어드민 환경에서도 실시간 반영되도록 동기화)
+    const SITE_DESIGN_THEMES = {
+      "Smart Wallet Guide": { primary: "#4f46e5", bg_main: "#faf9f6", font_headings: "'Plus Jakarta Sans'", layout: "modern" },
+      "Wealth Builder Daily": { primary: "#0f766e", bg_main: "#f4fcfb", font_headings: "'Outfit'", layout: "clean" },
+      "Federal Aid Center": { primary: "#1d4ed8", bg_main: "#f8fafc", font_headings: "'Inter'", layout: "classic" },
+      "Insurance Advisor US": { primary: "#047857", bg_main: "#f0fdf4", font_headings: "'Plus Jakarta Sans'", layout: "modern" },
+      "Premium Saver Blog": { primary: "#0369a1", bg_main: "#f0f9ff", font_headings: "'Outfit'", layout: "clean" },
+      "Care Cover Digest": { primary: "#0e7490", bg_main: "#f0fdfa", font_headings: "'Inter'", layout: "classic" },
+      "Justice Alert News": { primary: "#b91c1c", bg_main: "#fdf2f2", font_headings: "'Playfair Display', serif", layout: "serif" },
+      "Class Action Tracker": { primary: "#7c2d12", bg_main: "#fff7ed", font_headings: "'Merriweather', serif", layout: "serif" },
+      "Claim Rights Portal": { primary: "#1e293b", bg_main: "#fafafa", font_headings: "'Plus Jakarta Sans'", layout: "modern" },
+      "SaaS Finder Lab": { primary: "#6d28d9", bg_main: "#faf5ff", font_headings: "'Outfit'", layout: "clean" },
+      "Cloud Tech Review": { primary: "#0284c7", bg_main: "#f0f9ff", font_headings: "'Plus Jakarta Sans'", layout: "modern" },
+      "Secure Agency Blog": { primary: "#0f172a", bg_main: "#f8fafc", font_headings: "'Inter'", layout: "classic" },
+      "Side Income Engine": { primary: "#059669", bg_main: "#fafaf9", font_headings: "'Plus Jakarta Sans'", layout: "modern" },
+      "Passive Income Academy": { primary: "#b45309", bg_main: "#fffbeb", font_headings: "'Outfit'", layout: "clean" },
+      "Smart Dollar Hack": { primary: "#4f46e5", bg_main: "#f9fafb", font_headings: "'Inter'", layout: "classic" }
+    };
+
+    function applyDynamicTheme(theme) {
+      if (!theme) return;
+      const root = document.documentElement;
+      if (theme.primary) {
+        root.style.setProperty('--primary', theme.primary);
+        root.style.setProperty('--primary-glow', theme.primary + '1a');
+        root.style.setProperty('--border-focus', theme.primary);
+      }
+      if (theme.bg_main || theme.bgMain) {
+        root.style.setProperty('--bg-main', theme.bg_main || theme.bgMain);
+      }
+      if (theme.font_headings || theme.fontHeading) {
+        root.style.setProperty('--font-headings', theme.font_headings || theme.fontHeading);
+      }
+      
+      // 레이아웃 클래스 변경
+      document.body.className = document.body.className.replace(/\blayout-\S+/g, '');
+      const layout = theme.layout || theme.layoutStyle;
+      if (layout) {
+        document.body.classList.add('layout-' + layout);
+      }
+    }
 
     // Load DB Files
     try {
@@ -149,6 +213,12 @@
 
     // Load Specific Site Info and Posts
     function loadSite(siteName) {
+      // 실시간 테마 적용 (로컬 프리뷰 모드일 때 실행)
+      if (!window.siteConfig) {
+        const theme = SITE_DESIGN_THEMES[siteName];
+        applyDynamicTheme(theme);
+      }
+
       // Find site niche details
       let siteNiche = "finance";
       let siteUser = "User 1";
