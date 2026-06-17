@@ -619,3 +619,44 @@ body.layout-serif .article-container {
   line-height: 1.9;
 }
 
+/* Premium Niche-Specific Disclaimer Box */
+.niche-disclaimer-box {
+  background-color: #fffbeb;
+  border-left: 4px solid #d97706;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 28px;
+  font-size: 13.5px;
+  color: #78350f;
+  line-height: 1.6;
+}
+.niche-disclaimer-box.legal {
+  background-color: #fef2f2;
+  border-left-color: #ef4444;
+  color: #991b1b;
+}
+.niche-disclaimer-box.finance {
+  background-color: #f0fdf4;
+  border-left-color: #22c55e;
+  color: #166534;
+}
+.niche-disclaimer-box.insurance {
+  background-color: #f0f9ff;
+  border-left-color: #0ea5e9;
+  color: #075985;
+}
+.niche-disclaimer-box.tech {
+  background-color: #f8fafc;
+  border-left-color: #64748b;
+  color: #334155;
+}
+.niche-disclaimer-box strong {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11.5px;
+  letter-spacing: 0.5px;
+}
+
+
