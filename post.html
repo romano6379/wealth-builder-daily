@@ -107,6 +107,8 @@
 
   <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; background-color: white; margin-top: 60px;">
     <p>&copy; 2026 <span id="footer-site-name">AdSenseFlow Network</span>. All rights reserved.</p>
+    <p style="margin-top: 8px;"><a href="privacy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Privacy Policy</a> | <a href="terms.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Terms of Service</a></p>
+    <p style="margin-top: 12px; font-size: 11px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5;">Disclosure: This website displays Google AdSense advertisements. Clicks on these advertisements may generate affiliate or advertising revenue for the publisher.</p>
   </footer>
 
   <script>
@@ -314,6 +316,28 @@
         `;
       });
     }
+
+    // Cookie Consent Handlers
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!localStorage.getItem('cookie_consent_accepted')) {
+        document.getElementById('cookie-consent-banner').style.display = 'flex';
+      }
+    });
+
+    function acceptCookies() {
+      localStorage.setItem('cookie_consent_accepted', 'true');
+      const banner = document.getElementById('cookie-consent-banner');
+      banner.style.opacity = '0';
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 300);
+    }
   </script>
+
+  <!-- California Cookie Consent Banner -->
+  <div class="cookie-banner" id="cookie-consent-banner" style="display: none;">
+    <p>We use cookies to personalize content and ads, to provide social media features and to analyze our traffic. We also share information about your use of our site with our advertising partners. By clicking "Accept", you consent to our cookies in accordance with CCPA guidelines. <a href="privacy.html" style="color: var(--primary); text-decoration: underline; font-weight: 500;">Learn more</a></p>
+    <button onclick="acceptCookies()">Accept</button>
+  </div>
 </body>
 </html>
