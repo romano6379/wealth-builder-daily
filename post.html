@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article - AdSenseFlow Network</title>
+  <link rel="stylesheet" href="blog.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="data/keywords.js"></script>
+  <script src="data/posts.js"></script>
+  <script src="data/site-config.js" onerror="window.siteConfig=null;"></script>
+</head>
+<body>
+
+  <!-- Blog Header -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo" id="site-logo">
+        AdSenseFlow <span>Network</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="admin.html" style="background: var(--secondary); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px;">Admin Panel</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Article Details Grid -->
+  <main class="main-layout">
+    <!-- Left Column: Article Body -->
+    <article class="article-container">
+      <a href="index.html" style="text-decoration: none; color: var(--primary); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 20px;">
+        &larr; Back to Main Guides
+      </a>
+
+      <div class="article-header">
+        <h1 class="article-title" id="art-title">Loading Article...</h1>
+        
+        <div class="article-meta-info">
+          <span class="author-badge" id="art-author">Editorial Staff</span>
+          <span id="art-date">June 17, 2026</span>
+          <span id="art-readtime">5 min read</span>
+          <span class="editorial-status">Reviewed & Verified</span>
+        </div>
+      </div>
+
+      <!-- Table of Contents Box -->
+      <div class="toc-box">
+        <div class="toc-title">Table of Contents</div>
+        <ul class="toc-list" id="toc-list-container">
+          <!-- Populated dynamically via JS -->
+        </ul>
+      </div>
+
+      <!-- Article Rich Text Content -->
+      <div class="article-body" id="art-content">
+        <!-- Loaded dynamically via JS -->
+      </div>
+    </article>
+
+    <!-- Right Column: Sidebar -->
+    <aside class="sidebar">
+      <!-- High CPC Sidebar Ad Slot -->
+      <div class="adsense-placeholder sidebar-ad" id="post-sidebar-ad-slot">
+        <!-- Dynamic Ad Banner -->
+      </div>
+
+      <!-- Custom Niche Advisory -->
+      <div class="widget">
+        <h3 class="widget-title">Important Notice</h3>
+        <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+          This content is for informational and educational purposes only. Always consult a certified financial adviser or attorney before making decisions regarding loan programs, legal contracts, or insurance policies.
+        </p>
+      </div>
+    </aside>
+  </main>
+
+  <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; background-color: white; margin-top: 60px;">
+    <p>&copy; 2026 <span id="footer-site-name">AdSenseFlow Network</span>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Fetch Article from local data
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id');
+      const localPosts = JSON.parse(localStorage.getItem('local_generated_posts')) || [];
+      const allPosts = [...localPosts, ...(window.postsData || [])];
+      const keywords = window.keywordsData || {};
+      
+      const post = allPosts.find(p => p.id === postId);
+      if (post) {
+        renderArticle(post, keywords);
+      } else {
+        document.getElementById('art-title').textContent = "Article Not Found";
+      }
+    } catch (err) {
+      console.error("Error reading article data:", err);
+    }
+
+    function renderArticle(post, keywords) {
+      document.title = `${post.title} - ${post.site}`;
+      document.getElementById('site-logo').innerHTML = `${post.site.split(' ')[0]} <span>${post.site.split(' ').slice(1).join(' ') || 'Blog'}</span>`;
+      document.getElementById('footer-site-name').textContent = post.site;
+
+      document.getElementById('art-title').textContent = post.title;
+      document.getElementById('art-author').textContent = `By ${post.author || post.user || 'Editorial Staff'}`;
+      
+      const publishDate = new Date(post.date);
+      document.getElementById('art-date').textContent = publishDate.toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+      document.getElementById('art-readtime').textContent = post.readTime || '5 min read';
+
+      // Insert Content
+      const bodyContainer = document.getElementById('art-content');
+      bodyContainer.innerHTML = post.content;
+
+      // Extract Headings for TOC
+      const headings = bodyContainer.querySelectorAll('h2');
+      const tocContainer = document.getElementById('toc-list-container');
+      tocContainer.innerHTML = "";
+      
+      if (headings.length > 0) {
+        headings.forEach((h, index) => {
+          const id = `heading-${index}`;
+          h.id = id;
+          
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="#${id}">${h.textContent}</a>`;
+          tocContainer.appendChild(li);
+        });
+      } else {
+        document.querySelector('.toc-box').style.display = 'none';
+      }
+
+      // Populate AdSense Placeholders inside the content
+      populatePlaceholders(post.category);
+    }
+
+    function populatePlaceholders(niche) {
+      // Sidebar Ad
+      const ads = {
+        finance: {
+          title: "Top High-Yield Savings Accounts - Up to 5.2% APY",
+          desc: "Maximize interest on cash with federally insured accounts. No monthly fees, minimum deposit starting at $100.",
+          url: "www.smartfinance-yields.com"
+        },
+        insurance: {
+          title: "Get Free Health Insurance Quotes in Under 60 Seconds",
+          desc: "Self-employed plans start under $150/mo. Compare comprehensive medical, dental & vision plans.",
+          url: "www.insurancechoice-us.com"
+        },
+        legal: {
+          title: "Injured in a Car Crash? Claim Financial Compensation Today",
+          desc: "Attorneys fight to win payment for medical expenses, lost wages, and pain. 100% free legal assessment.",
+          url: "www.injuryhelp-network.com"
+        },
+        tech: {
+          title: "Enterprise CRM Software - Free 14-Day Full Access Trial",
+          desc: "Scale pipeline management, automate follow-ups, and integrate team emails in one intuitive workspace.",
+          url: "www.growthflow-crm.com"
+        }
+      };
+
+      const ad = ads[niche] || ads.finance;
+      
+      // Sidebar ad slot
+      document.getElementById('post-sidebar-ad-slot').innerHTML = `
+        <div class="simulated-ad-title" onclick="alert('Simulated AdSense revenue added! Niche value: ${niche}')">
+          ${ad.title}
+        </div>
+        <div class="simulated-ad-desc">${ad.desc}</div>
+        <div class="simulated-ad-url">${ad.url}</div>
+      `;
+
+      // Content Ads (dynamic matching within body)
+      const inArticlePlaceholders = document.querySelectorAll('.adsense-placeholder');
+      inArticlePlaceholders.forEach(placeholder => {
+        if (placeholder.id === 'post-sidebar-ad-slot') return;
+        
+        const slotType = placeholder.dataset.slot;
+        let slotAd = {...ad};
+        
+        if (slotType === 'top-banner') {
+          slotAd.title = `AD: Best Local Offers for ${niche.toUpperCase()}`;
+          slotAd.desc = `Instantly search and connect with qualified local professionals in your state. Compare ratings, prices and check certifications.`;
+        } else {
+          slotAd.title = `AD: Sponsored Official Guide for ${niche === 'finance' ? 'Refinancing Loans' : 'Claims & Savings'}`;
+        }
+        
+        placeholder.innerHTML = `
+          <div class="simulated-ad-title" onclick="alert('Simulated Content Ad click! High CPC CTR recorded for: ${niche}')">
+            ${slotAd.title}
+          </div>
+          <div class="simulated-ad-desc">${slotAd.desc}</div>
+          <div class="simulated-ad-url">${slotAd.url}</div>
+        `;
+      });
+    }
+  </script>
+</body>
+</html>
