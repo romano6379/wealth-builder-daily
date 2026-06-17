@@ -94,7 +94,7 @@ window.keywordsData = {
     }
   },
   "user_assignments": {
-    "User 1": {
+    "chunchanil67@gmail.com": {
       "niche": "finance",
       "sites": ["Smart Wallet Guide", "Wealth Builder Daily", "Federal Aid Center"]
     },
