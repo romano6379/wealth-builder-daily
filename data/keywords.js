@@ -102,7 +102,7 @@ window.keywordsData = {
       "niche": "insurance",
       "sites": ["Insurance Advisor US", "Premium Saver Blog", "Care Cover Digest"]
     },
-    "User 3": {
+    "kimjiyeun70@gmail.com": {
       "niche": "legal",
       "sites": ["Justice Alert News", "Class Action Tracker", "Claim Rights Portal"]
     },
