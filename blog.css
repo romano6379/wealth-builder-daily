@@ -1152,3 +1152,59 @@ body.layout-serif .article-container {
   box-shadow: 0 6px 16px var(--primary-glow);
 }
 
+/* Premium Structured Step-by-Step Lists (One item per line, vertical stack) */
+.step-list {
+  list-style: none;
+  padding: 0 !important;
+  margin: 32px 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.step-item:hover {
+  border-color: rgba(79, 70, 229, 0.15);
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background-color: var(--primary);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 0 4px 10px var(--primary-glow);
+}
+
+.step-content {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0 !important;
+}
+
+.step-content strong {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+
