@@ -86,6 +86,90 @@
       <div class="article-body" id="art-content">
         <!-- Loaded dynamically via JS -->
       </div>
+
+      <!-- Visual Calculator Widget -->
+      <div class="interactive-calculator-card" id="calculator-section">
+        <div class="calc-header">
+          <div class="calc-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calculator"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="16"></line><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="16" x2="16" y2="22"></line><line x1="12" y1="11" x2="12" y2="13"></line><line x1="8" y1="12" x2="8" y2="12"></line><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="12" x2="16" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg>
+            Financial Planning & Estimation
+          </div>
+          <div class="calc-tabs">
+            <button class="calc-tab-btn active" id="calc-tab-savings" onclick="setCalcTab('savings')">Savings Plan</button>
+            <button class="calc-tab-btn" id="calc-tab-loan" onclick="setCalcTab('loan')">Loan Repayment</button>
+          </div>
+        </div>
+        <div class="calc-grid">
+          <div class="calc-inputs">
+            <div class="calc-input-group">
+              <div class="calc-label-row">
+                <span id="calc-label-principal">Monthly Contribution</span>
+                <span class="calc-value-display" id="calc-val-principal">$500</span>
+              </div>
+              <input type="range" class="calc-slider" id="calc-slider-principal" min="50" max="5000" step="50" value="500" oninput="calculateResults()">
+            </div>
+            <div class="calc-input-group">
+              <div class="calc-label-row">
+                <span>Annual Interest Rate</span>
+                <span class="calc-value-display" id="calc-val-rate">5.0%</span>
+              </div>
+              <input type="range" class="calc-slider" id="calc-slider-rate" min="0.5" max="15" stroke-width="2" step="0.1" value="5.0" oninput="calculateResults()">
+            </div>
+            <div class="calc-input-group">
+              <div class="calc-label-row">
+                <span id="calc-label-term">Time Period</span>
+                <span class="calc-value-display" id="calc-val-term">5 Years</span>
+              </div>
+              <input type="range" class="calc-slider" id="calc-slider-term" min="1" max="30" step="1" value="5" oninput="calculateResults()">
+            </div>
+          </div>
+          <div class="calc-results">
+            <div class="calc-result-title" id="calc-result-heading">Estimated Total Savings</div>
+            <div class="calc-result-value" id="calc-result-total">$34,038</div>
+            <div class="calc-breakdown">
+              <div class="calc-breakdown-row">
+                <span id="calc-break-principal-label">Total Principal</span>
+                <span id="calc-break-principal-val">$30,000</span>
+              </div>
+              <div class="calc-breakdown-row">
+                <span id="calc-break-interest-label">Total Interest Earned</span>
+                <span id="calc-break-interest-val">$4,038</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Interactive Timeline Graphic -->
+      <div class="interactive-timeline-card" id="timeline-section">
+        <div class="timeline-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-git-commit"><circle cx="12" cy="12" r="4"></circle><line x1="1.05" y1="12" x2="7" y2="12"></line><line x1="17.01" y1="12" x2="22.96" y2="12"></line></svg>
+          Application & Approval Journey
+        </div>
+        <div class="timeline-steps">
+          <div class="timeline-progress-line" id="timeline-progress"></div>
+          <div class="timeline-step-node active" onclick="activateStep(0)">
+            <div class="timeline-node-circle">1</div>
+            <div class="timeline-node-label">Pre-Qualify</div>
+          </div>
+          <div class="timeline-step-node" onclick="activateStep(1)">
+            <div class="timeline-node-circle">2</div>
+            <div class="timeline-node-label">Doc Review</div>
+          </div>
+          <div class="timeline-step-node" onclick="activateStep(2)">
+            <div class="timeline-node-circle">3</div>
+            <div class="timeline-node-label">Offer Match</div>
+          </div>
+          <div class="timeline-step-node" onclick="activateStep(3)">
+            <div class="timeline-node-circle">4</div>
+            <div class="timeline-node-label">Funding</div>
+          </div>
+        </div>
+        <div class="timeline-details-pane" id="timeline-details">
+          <h4>Step 1: Check Eligibility & Pre-Qualify</h4>
+          <p>Instantly estimate your rate options by submitting basic criteria. This usually takes less than 2 minutes and performs a soft credit inquiry that does not impact your credit score.</p>
+        </div>
+      </div>
     </article>
 
     <!-- Right Column: Sidebar -->
@@ -191,31 +275,20 @@
       if (disclaimerContainer) {
         const disclaimers = {
           legal: `
-            <strong>⚠️ Legal Notice & Risk Disclosure</strong>
-            U.S. litigation and dispute claims carry significant financial risks and strict procedural limits. 
-            The content on this portal is for general informational and educational purposes only and does NOT constitute formal legal advice or representation. 
-            No attorney-client relationship is formed by reading this website. 
-            Always consult a licensed attorney in your state before filing any legal claim or signing contractual agreements.
+            <strong>⚠️ ATTORNEY-CLIENT RELATIONSHIP DISCLAIMER</strong>
+            This article is for informational and educational purposes only and does not constitute formal legal advice, solicitation, or establish an attorney-client relationship. Lawsuit deadlines, eligibility criteria, and settlement payouts vary strictly by jurisdiction and are subject to change. Always consult with a licensed, qualified attorney in your state regarding your specific legal rights before filing a claim or signing agreements.
           `,
           finance: `
-            <strong>📊 Financial & Tax Advisory Disclosure</strong>
-            Personal finance and taxation strategies are subject to complex federal and state codes that change frequently. 
-            This guide is provided for educational and general information purposes only and does not constitute financial, investment, or tax advice. 
-            Past performance of programs or savings models does not guarantee future results. 
-            Always consult a Certified Financial Planner (CFP) or a Certified Public Accountant (CPA) before making major financial decisions.
+            <strong>📊 FINANCIAL & TAX ADVISORY DISCLAIMER</strong>
+            The information provided on this website is for informational and educational purposes only and does not constitute professional financial, investment, or tax advice. We are not Certified Financial Planners (CFP) or Certified Public Accountants (CPA). Financial regulations, interest rates, and government assistance eligibility criteria change frequently. Always consult with a licensed financial advisor or tax professional before making major investment decisions.
           `,
           insurance: `
-            <strong>🛡️ Insurance Coverage Disclaimer</strong>
-            We are not a licensed insurance carrier, underwriter, or government agency. 
-            Insurance quotes, premiums, and policies vary significantly by individual eligibility, state laws, and local ZIP codes. 
-            This information is a market summary and does not constitute a binding quote. 
-            Always consult a licensed local insurance agent or broker before enrolling in Medicare or any private policy.
+            <strong>🛡️ INSURANCE COVERAGE & POLICY ESTIMATE DISCLAIMER</strong>
+            This content is a market summary provided for educational purposes and does not constitute a binding quote or official advisory. We are not a licensed insurance carrier, underwriter, agency, or state regulatory body. Insurance policies, coverage options, and premium estimates vary significantly based on ZIP code, health status, and state regulations. Verify all details directly with a licensed insurance agent or broker.
           `,
           tech: `
-            <strong>💻 Tech Implementation & Compliance Disclaimer</strong>
-            Software deployments, SaaS tools, and hosting setups carry security compliance risks. 
-            This material is for informational evaluations only. 
-            Verify software specifications, system security, and specific compliance mandates (SOC2, GDPR, HIPAA) with certified IT professionals before implementation.
+            <strong>💻 TECH IMPLEMENTATION & COMPLIANCE DISCLAIMER</strong>
+            All product reviews, SaaS recommendations, and cloud configurations are for informational evaluations only. Pricing, terms of service, and feature sets are subject to change by software providers. Security configurations and specific regulations (SOC2, GDPR, HIPAA) should be validated directly with official product documentations or a certified IT administrator before implementation.
           `
         };
         const niche = post.category || 'finance';
@@ -317,8 +390,133 @@
       });
     }
 
+    // Interactive Calculator & Timeline Logic
+    let currentCalcMode = 'savings';
+
+    function setCalcTab(mode) {
+      currentCalcMode = mode;
+      document.getElementById('calc-tab-savings').classList.toggle('active', mode === 'savings');
+      document.getElementById('calc-tab-loan').classList.toggle('active', mode === 'loan');
+      
+      if (mode === 'savings') {
+        document.getElementById('calc-label-principal').textContent = 'Monthly Contribution';
+        document.getElementById('calc-label-term').textContent = 'Savings Term';
+        document.getElementById('calc-result-heading').textContent = 'Estimated Total Savings';
+        document.getElementById('calc-break-principal-label').textContent = 'Total Principal Contributed';
+        document.getElementById('calc-break-interest-label').textContent = 'Total Interest Earned';
+        
+        // Set default sliders for savings
+        document.getElementById('calc-slider-principal').min = "50";
+        document.getElementById('calc-slider-principal').max = "5000";
+        document.getElementById('calc-slider-principal').value = "500";
+        document.getElementById('calc-slider-rate').value = "5.0";
+        document.getElementById('calc-slider-term').value = "5";
+      } else {
+        document.getElementById('calc-label-principal').textContent = 'Loan Amount';
+        document.getElementById('calc-label-term').textContent = 'Loan Term';
+        document.getElementById('calc-result-heading').textContent = 'Estimated Monthly Payment';
+        document.getElementById('calc-break-principal-label').textContent = 'Total Principal Paid';
+        document.getElementById('calc-break-interest-label').textContent = 'Total Interest Cost';
+        
+        // Set default sliders for loan
+        document.getElementById('calc-slider-principal').min = "1000";
+        document.getElementById('calc-slider-principal').max = "200000";
+        document.getElementById('calc-slider-principal').value = "25000";
+        document.getElementById('calc-slider-rate').value = "6.5";
+        document.getElementById('calc-slider-term').value = "5";
+      }
+      calculateResults();
+    }
+
+    function calculateResults() {
+      const p = parseFloat(document.getElementById('calc-slider-principal').value);
+      const r = parseFloat(document.getElementById('calc-slider-rate').value) / 100;
+      const t = parseFloat(document.getElementById('calc-slider-term').value);
+      
+      document.getElementById('calc-val-rate').textContent = (r * 100).toFixed(1) + '%';
+      document.getElementById('calc-val-term').textContent = t + (t === 1 ? ' Year' : ' Years');
+      
+      if (currentCalcMode === 'savings') {
+        document.getElementById('calc-val-principal').textContent = '$' + p.toLocaleString();
+        const m = r / 12;
+        const n = 12 * t;
+        let finalVal = 0;
+        if (m === 0) {
+          finalVal = p * n;
+        } else {
+          finalVal = p * ((Math.pow(1 + m, n) - 1) / m) * (1 + m);
+        }
+        const totalPrincipal = p * n;
+        const totalInterest = Math.max(0, finalVal - totalPrincipal);
+        
+        document.getElementById('calc-result-total').textContent = '$' + Math.round(finalVal).toLocaleString();
+        document.getElementById('calc-break-principal-val').textContent = '$' + Math.round(totalPrincipal).toLocaleString();
+        document.getElementById('calc-break-interest-val').textContent = '$' + Math.round(totalInterest).toLocaleString();
+      } else {
+        document.getElementById('calc-val-principal').textContent = '$' + p.toLocaleString();
+        const m = r / 12;
+        const n = 12 * t;
+        let monthlyPayment = 0;
+        if (m === 0) {
+          monthlyPayment = p / n;
+        } else {
+          monthlyPayment = p * (m * Math.pow(1 + m, n)) / (Math.pow(1 + m, n) - 1);
+        }
+        const totalPaid = monthlyPayment * n;
+        const totalInterest = Math.max(0, totalPaid - p);
+        
+        document.getElementById('calc-result-total').textContent = '$' + Math.round(monthlyPayment).toLocaleString();
+        document.getElementById('calc-break-principal-val').textContent = '$' + Math.round(p).toLocaleString();
+        document.getElementById('calc-break-interest-val').textContent = '$' + Math.round(totalInterest).toLocaleString();
+      }
+    }
+
+    const stepDetails = [
+      {
+        title: "Step 1: Check Eligibility & Pre-Qualify",
+        desc: "Instantly estimate your rate options by submitting basic criteria. This usually takes less than 2 minutes and performs a soft credit inquiry that does not impact your credit score."
+      },
+      {
+        title: "Step 2: Submit Verification Documents",
+        desc: "Upload secure digital copies of your identification, tax records, and recent bank statements. Our automated underwriting system processes these details securely to match program limits."
+      },
+      {
+        title: "Step 3: Review Offers & Select Best Plan",
+        desc: "Compare available interest rate structures, terms, and payment schedules. Speak to an advisor if necessary to lock in your final choice before drafting formal contracts."
+      },
+      {
+        title: "Step 4: Receive Final Funding & Approvals",
+        desc: "Sign your electronic loan or savings agreement. For loans, funds are direct-deposited into your verified bank account in as little as 24-48 business hours."
+      }
+    ];
+
+    function activateStep(idx) {
+      const steps = document.querySelectorAll('.timeline-step-node');
+      steps.forEach((step, i) => {
+        step.classList.toggle('active', i === idx);
+        step.classList.toggle('completed', i < idx);
+      });
+      
+      const progressLine = document.getElementById('timeline-progress');
+      progressLine.style.width = (idx * 33.33) + '%';
+      
+      const detailsPane = document.getElementById('timeline-details');
+      detailsPane.style.opacity = 0;
+      detailsPane.style.transform = 'translateY(5px)';
+      
+      setTimeout(() => {
+        detailsPane.innerHTML = `<h4>${stepDetails[idx].title}</h4><p>${stepDetails[idx].desc}</p>`;
+        detailsPane.style.opacity = 1;
+        detailsPane.style.transform = 'translateY(0)';
+      }, 200);
+    }
+
     // Cookie Consent Handlers
     document.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('calc-slider-principal')) {
+        calculateResults();
+        activateStep(0);
+      }
       if (!localStorage.getItem('cookie_consent_accepted')) {
         document.getElementById('cookie-consent-banner').style.display = 'flex';
       }
