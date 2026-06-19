@@ -174,6 +174,25 @@
 
     <!-- Right Column: Sidebar -->
     <aside class="sidebar">
+      <!-- Bookmark Widget -->
+      <div class="widget bookmark-widget">
+        <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Save This Article</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">Bookmark this page to reference calculations and eligibility criteria later.</p>
+        <button class="btn-bookmark" onclick="addBookmarkAlert()">
+          ⭐ Bookmark (Ctrl + D)
+        </button>
+      </div>
+
+      <!-- Newsletter/Subscription Widget -->
+      <div class="widget newsletter-widget">
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Federal Aid Updates</h3>
+        <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">Subscribe to receive real-time alerts about new application slots, limits & forms.</p>
+        <div class="newsletter-form">
+          <input type="email" class="newsletter-input" id="newsletter-email-input" placeholder="Enter your email...">
+          <button class="btn-subscribe" onclick="handleSubscribe()">Subscribe Now</button>
+        </div>
+      </div>
+
       <!-- High CPC Sidebar Ad Slot -->
       <div class="adsense-placeholder sidebar-ad" id="post-sidebar-ad-slot">
         <!-- Dynamic Ad Banner -->
@@ -509,6 +528,23 @@
         detailsPane.style.opacity = 1;
         detailsPane.style.transform = 'translateY(0)';
       }, 200);
+    }
+
+    // Bookmark Alert Handler
+    function addBookmarkAlert() {
+      alert("To bookmark this site, please press Ctrl + D (or Cmd + D on Mac) in your browser.");
+    }
+
+    // Subscribe Handler
+    function handleSubscribe() {
+      const emailInput = document.getElementById('newsletter-email-input');
+      const email = emailInput.value.trim();
+      if (!email) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+      alert(`Thank you for subscribing! Free federal aid updates will be sent to: ${email}`);
+      emailInput.value = "";
     }
 
     // Cookie Consent Handlers
