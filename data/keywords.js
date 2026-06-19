@@ -43,7 +43,12 @@ window.keywordsData = {
   },
   "seasonal_keywords": {
     "tax_season": {
-      "months": [1, 2, 3, 4],
+      "months": [
+        1,
+        2,
+        3,
+        4
+      ],
       "keywords": {
         "finance": [
           "how to check IRS tax refund status online",
@@ -59,7 +64,11 @@ window.keywordsData = {
       }
     },
     "mid_year_school_insurance": {
-      "months": [5, 6, 7],
+      "months": [
+        5,
+        6,
+        7
+      ],
       "keywords": {
         "finance": [
           "FAFSA student financial aid deadlines and requirements",
@@ -74,7 +83,11 @@ window.keywordsData = {
       }
     },
     "late_year_enrollment": {
-      "months": [10, 11, 12],
+      "months": [
+        10,
+        11,
+        12
+      ],
       "keywords": {
         "insurance": [
           "medicare advantage plans open enrollment guide 2026",
@@ -96,23 +109,43 @@ window.keywordsData = {
   "user_assignments": {
     "User 1": {
       "niche": "finance",
-      "sites": ["Smart Wallet Guide", "Wealth Builder Daily", "Federal Aid Center"]
+      "sites": [
+        "Smart Wallet Guide",
+        "Wealth Builder Daily",
+        "Federal Aid Center"
+      ]
     },
-    "chunchanil67@gmail.com": {
+    "User 2": {
       "niche": "insurance",
-      "sites": ["Insurance Advisor US", "Premium Saver Blog", "Care Cover Digest"]
+      "sites": [
+        "Insurance Advisor US",
+        "Premium Saver Blog",
+        "Care Cover Digest"
+      ]
     },
-    "kimjiyeun70@gmail.com": {
+    "User 3": {
       "niche": "legal",
-      "sites": ["Justice Alert News", "Class Action Tracker", "Claim Rights Portal"]
+      "sites": [
+        "Justice Alert News",
+        "Class Action Tracker",
+        "Claim Rights Portal"
+      ]
     },
     "User 4": {
       "niche": "tech",
-      "sites": ["SaaS Finder Lab", "Cloud Tech Review", "Secure Agency Blog"]
+      "sites": [
+        "SaaS Finder Lab",
+        "Cloud Tech Review",
+        "Secure Agency Blog"
+      ]
     },
     "User 5": {
       "niche": "finance",
-      "sites": ["Side Income Engine", "Passive Income Academy", "Smart Dollar Hack"]
+      "sites": [
+        "Side Income Engine",
+        "Passive Income Academy",
+        "Smart Dollar Hack"
+      ]
     }
   }
 };
