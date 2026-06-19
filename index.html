@@ -1,412 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdSenseFlow Network - Blog Portal</title>
-  <link rel="stylesheet" href="blog.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="data/keywords.js"></script>
-  <script src="data/posts.js"></script>
-  <script src="data/site-config.js" onerror="window.siteConfig=null;"></script>
-  <script>
-    // Apply Vercel Site-Specific Theme Config dynamically
-    if (window.siteConfig) {
-      const root = document.documentElement;
-      if (window.siteConfig.primaryColor) {
-        root.style.setProperty('--primary', window.siteConfig.primaryColor);
-        root.style.setProperty('--primary-glow', window.siteConfig.primaryColor + '1a');
-        root.style.setProperty('--border-focus', window.siteConfig.primaryColor);
-      }
-      if (window.siteConfig.bgMain) {
-        root.style.setProperty('--bg-main', window.siteConfig.bgMain);
-      }
-      if (window.siteConfig.fontHeading) {
-        root.style.setProperty('--font-headings', window.siteConfig.fontHeading);
-      }
-      // Add layout class after DOM content loaded
-      document.addEventListener('DOMContentLoaded', () => {
-        if (window.siteConfig.layoutStyle) {
-          document.body.classList.add('layout-' + window.siteConfig.layoutStyle);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Suspended</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
         }
-      });
-    }
-  </script>
+        .container {
+            max-width: 500px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 24px;
+            color: #f1f5f9;
+            margin-bottom: 16px;
+        }
+        p {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
-
-  <!-- Blog Header -->
-  <header>
-    <div class="header-container">
-      <a href="index.html" class="logo" id="site-logo">
-        AdSenseFlow <span>Network</span>
-      </a>
-
-      <!-- Demo Tool: Toggle Between the 15 Network Sites -->
-      <div class="site-selector-container">
-        <span style="font-size: 11px; color: var(--text-muted); font-weight: 700;">ACTIVE SITE:</span>
-        <select id="network-site-selector" class="site-select">
-          <!-- Populated dynamically -->
-        </select>
-      </div>
-
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="admin.html" style="background: var(--secondary); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px;">Admin Panel</a></li>
-        </ul>
-      </nav>
+    <div class="container">
+        <h1>403 Forbidden / Site Suspended</h1>
+        <p>This website is currently undergoing scheduled maintenance or has been temporarily suspended by the administrator. Please check back later.</p>
     </div>
-  </header>
-
-  <!-- Main Grid Layout -->
-  <main class="main-layout">
-    <!-- Left Column: Posts List -->
-    <section>
-      <!-- Categories Filter -->
-      <div class="category-filter" id="category-filter-container">
-        <button class="cat-btn active" data-category="all">All Articles</button>
-        <button class="cat-btn" data-category="finance">Smart Finance</button>
-        <button class="cat-btn" data-category="insurance">Insurance Hub</button>
-        <button class="cat-btn" data-category="legal">Legal Help</button>
-        <button class="cat-btn" data-category="tech">Tech & Tools</button>
-      </div>
-
-      <h1 style="font-size: 24px; font-weight: 800; margin-bottom: 24px;" id="blog-category-heading">Latest Guides & Resources</h1>
-
-      <!-- Posts Cards Grid -->
-      <div class="posts-grid" id="posts-container">
-        <!-- Loaded dynamically via JavaScript -->
-      </div>
-    </section>
-
-    <!-- Right Column: Sidebar -->
-    <aside class="sidebar">
-      <!-- Bookmark Widget -->
-      <div class="widget bookmark-widget">
-        <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Bookmark This Guide</h3>
-        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">Keep this page saved so you can check updated 2026 guidelines anytime.</p>
-        <button class="btn-bookmark" onclick="addBookmarkAlert()">
-          ⭐ Bookmark (Ctrl + D)
-        </button>
-      </div>
-
-      <!-- Search Widget -->
-      <div class="widget search-widget">
-        <h3 class="widget-title">Search Guides</h3>
-        <input type="text" id="blog-search-input" placeholder="Type keywords...">
-      </div>
-
-      <!-- Newsletter/Subscription Widget -->
-      <div class="widget newsletter-widget">
-        <h3 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Federal Aid Updates</h3>
-        <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">Subscribe to receive real-time alerts about new application slots, limits & forms.</p>
-        <div class="newsletter-form">
-          <input type="email" class="newsletter-input" id="newsletter-email-input" placeholder="Enter your email...">
-          <button class="btn-subscribe" onclick="handleSubscribe()">Subscribe Now</button>
-        </div>
-      </div>
-
-      <!-- Top High-CPC Ad Slot -->
-      <div class="adsense-placeholder sidebar-ad" id="sidebar-ad-slot">
-        <!-- Dynamic Ad Banner -->
-      </div>
-
-      <!-- Niche Stats Widget -->
-      <div class="widget">
-        <h3 class="widget-title">Niche Overview</h3>
-        <p style="font-size: 14px; color: var(--text-muted);" id="site-niche-description">
-          Loading site details...
-        </p>
-      </div>
-    </aside>
-  </main>
-
-  <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; background-color: white; margin-top: 60px;">
-    <p>&copy; 2026 <span id="footer-site-name">AdSenseFlow Network</span>. All rights reserved.</p>
-    <p style="margin-top: 8px;"><a href="privacy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Privacy Policy</a> | <a href="terms.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Terms of Service</a></p>
-    <p style="margin-top: 12px; font-size: 11px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5;">Disclosure: This website displays Google AdSense advertisements. Clicks on these advertisements may generate affiliate or advertising revenue for the publisher.</p>
-  </footer>
-
-  <script>
-    // Global State
-    let posts = [];
-    let keywordsData = {};
-    let currentSite = "";
-
-    // 15개 사이트별 고유 디자인 테마 설정 (로컬 데모/어드민 환경에서도 실시간 반영되도록 동기화)
-    const SITE_DESIGN_THEMES = {
-      "Smart Wallet Guide": { primary: "#4f46e5", bg_main: "#faf9f6", font_headings: "'Plus Jakarta Sans'", layout: "modern" },
-      "Wealth Builder Daily": { primary: "#0f766e", bg_main: "#f4fcfb", font_headings: "'Outfit'", layout: "clean" },
-      "Federal Aid Center": { primary: "#1d4ed8", bg_main: "#f8fafc", font_headings: "'Inter'", layout: "classic" },
-      "Insurance Advisor US": { primary: "#047857", bg_main: "#f0fdf4", font_headings: "'Plus Jakarta Sans'", layout: "modern" },
-      "Premium Saver Blog": { primary: "#0369a1", bg_main: "#f0f9ff", font_headings: "'Outfit'", layout: "clean" },
-      "Care Cover Digest": { primary: "#0e7490", bg_main: "#f0fdfa", font_headings: "'Inter'", layout: "classic" },
-      "Justice Alert News": { primary: "#b91c1c", bg_main: "#fdf2f2", font_headings: "'Playfair Display', serif", layout: "serif" },
-      "Class Action Tracker": { primary: "#7c2d12", bg_main: "#fff7ed", font_headings: "'Merriweather', serif", layout: "serif" },
-      "Claim Rights Portal": { primary: "#1e293b", bg_main: "#fafafa", font_headings: "'Plus Jakarta Sans'", layout: "modern" },
-      "SaaS Finder Lab": { primary: "#6d28d9", bg_main: "#faf5ff", font_headings: "'Outfit'", layout: "clean" },
-      "Cloud Tech Review": { primary: "#0284c7", bg_main: "#f0f9ff", font_headings: "'Plus Jakarta Sans'", layout: "modern" },
-      "Secure Agency Blog": { primary: "#0f172a", bg_main: "#f8fafc", font_headings: "'Inter'", layout: "classic" },
-      "Side Income Engine": { primary: "#059669", bg_main: "#fafaf9", font_headings: "'Plus Jakarta Sans'", layout: "modern" },
-      "Passive Income Academy": { primary: "#b45309", bg_main: "#fffbeb", font_headings: "'Outfit'", layout: "clean" },
-      "Smart Dollar Hack": { primary: "#4f46e5", bg_main: "#f9fafb", font_headings: "'Inter'", layout: "classic" }
-    };
-
-    function applyDynamicTheme(theme) {
-      if (!theme) return;
-      const root = document.documentElement;
-      if (theme.primary) {
-        root.style.setProperty('--primary', theme.primary);
-        root.style.setProperty('--primary-glow', theme.primary + '1a');
-        root.style.setProperty('--border-focus', theme.primary);
-      }
-      if (theme.bg_main || theme.bgMain) {
-        root.style.setProperty('--bg-main', theme.bg_main || theme.bgMain);
-      }
-      if (theme.font_headings || theme.fontHeading) {
-        root.style.setProperty('--font-headings', theme.font_headings || theme.fontHeading);
-      }
-      
-      // 레이아웃 클래스 변경
-      document.body.className = document.body.className.replace(/\blayout-\S+/g, '');
-      const layout = theme.layout || theme.layoutStyle;
-      if (layout) {
-        document.body.classList.add('layout-' + layout);
-      }
-    }
-
-    // Load DB Files
-    try {
-      const localPosts = JSON.parse(localStorage.getItem('local_generated_posts')) || [];
-      posts = [...localPosts, ...(window.postsData || [])];
-      keywordsData = window.keywordsData || {};
-      
-      initSelector();
-      loadSite(currentSite);
-    } catch (err) {
-      console.error("Error loading blog data:", err);
-    }
-
-    // Initialize Network Selector
-    function initSelector() {
-      const selector = document.getElementById('network-site-selector');
-      selector.innerHTML = "";
-      
-      // Get all 15 sites
-      const allSites = [];
-      Object.keys(keywordsData.user_assignments).forEach(user => {
-        keywordsData.user_assignments[user].sites.forEach(siteName => {
-          allSites.push({
-            name: siteName,
-            user: user,
-            niche: keywordsData.user_assignments[user].niche
-          });
-        });
-      });
-
-      // Default site selection
-      if (window.siteConfig && window.siteConfig.siteName) {
-        currentSite = window.siteConfig.siteName;
-        const selContainer = document.querySelector('.site-selector-container');
-        if (selContainer) selContainer.style.display = 'none';
-      } else {
-        currentSite = localStorage.getItem('activeNetworkSite') || allSites[0].name;
-      }
-
-      allSites.forEach(s => {
-        const opt = document.createElement('option');
-        opt.value = s.name;
-        opt.textContent = `${s.name} (${s.user})`;
-        if (s.name === currentSite) opt.selected = true;
-        selector.appendChild(opt);
-      });
-
-      selector.addEventListener('change', (e) => {
-        currentSite = e.target.value;
-        localStorage.setItem('activeNetworkSite', currentSite);
-        loadSite(currentSite);
-      });
-    }
-
-    // Load Specific Site Info and Posts
-    function loadSite(siteName) {
-      // 실시간 테마 적용 (로컬 프리뷰 모드일 때 실행)
-      if (!window.siteConfig) {
-        const theme = SITE_DESIGN_THEMES[siteName];
-        applyDynamicTheme(theme);
-      }
-
-      // Find site niche details
-      let siteNiche = "finance";
-      let siteUser = "User 1";
-      Object.keys(keywordsData.user_assignments).forEach(user => {
-        if (keywordsData.user_assignments[user].sites.includes(siteName)) {
-          siteNiche = keywordsData.user_assignments[user].niche;
-          siteUser = user;
-        }
-      });
-
-      // Update Branding
-      document.getElementById('site-logo').innerHTML = `${siteName.split(' ')[0]} <span>${siteName.split(' ').slice(1).join(' ') || 'Blog'}</span>`;
-      document.getElementById('footer-site-name').textContent = siteName;
-      document.getElementById('site-niche-description').innerHTML = `
-        <strong>Niche:</strong> ${siteNiche.toUpperCase()}<br>
-        <strong>Operator:</strong> ${siteUser} (US Resident)<br>
-        <strong>Focus:</strong> High-CPC ad targets in the English-speaking market.
-      `;
-
-      // Load Site Ads
-      renderSidebarAd(siteNiche);
-
-      // Render Posts
-      renderPosts(siteName);
-
-      // Add Category Event Listeners
-      const catButtons = document.querySelectorAll('.cat-btn');
-      catButtons.forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.category === 'all') btn.classList.add('active');
-        
-        btn.onclick = () => {
-          catButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          renderPosts(siteName, btn.dataset.category);
-        };
-      });
-
-      // Add Search Event Listener
-      const searchInput = document.getElementById('blog-search-input');
-      searchInput.oninput = (e) => {
-        const query = e.target.value.toLowerCase();
-        renderPosts(siteName, 'all', query);
-      };
-    }
-
-    // Render Posts Cards
-    function renderPosts(siteName, filterCategory = 'all', searchQuery = '') {
-      const container = document.getElementById('posts-container');
-      container.innerHTML = "";
-
-      // Filter by Site Name
-      let sitePosts = posts.filter(p => p.site === siteName);
-
-      // Filter by Category
-      if (filterCategory !== 'all') {
-        sitePosts = sitePosts.filter(p => p.category === filterCategory);
-      }
-
-      // Filter by Search Query
-      if (searchQuery) {
-        sitePosts = sitePosts.filter(p => p.title.toLowerCase().includes(searchQuery) || p.excerpt.toLowerCase().includes(searchQuery));
-      }
-
-      if (sitePosts.length === 0) {
-        container.innerHTML = `
-          <div style="grid-column: 1/-1; text-align: center; padding: 40px; border: 1px dashed var(--border); border-radius: var(--radius); background: white;">
-            <p style="color: var(--text-muted); font-size: 15px;">No articles posted on this site yet.</p>
-            <p style="font-size: 12px; margin-top: 10px; color: var(--text-muted)">Activate AutoPilot or use the Admin Panel to write one!</p>
-          </div>
-        `;
-        return;
-      }
-
-      sitePosts.forEach(post => {
-        const card = document.createElement('div');
-        card.className = "post-card";
-        card.innerHTML = `
-          <div class="post-card-body">
-            <span class="post-tag">${post.category}</span>
-            <a href="post.html?id=${post.id}" class="post-card-title">${post.title}</a>
-            <p class="post-excerpt">${post.excerpt}</p>
-            <div class="post-meta">
-              <span>By ${post.author || post.user || 'Editorial Staff'}</span>
-              <span>${post.readTime || '5 min read'}</span>
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // Render Simulated High-CPC Ad
-    function renderSidebarAd(niche) {
-      const adSlot = document.getElementById('sidebar-ad-slot');
-      
-      const ads = {
-        finance: {
-          title: "SBA Loan Rates are Dropping - Compare 2026 Business Loans",
-          desc: "Fast approval, low fixed rates for small business owners. Secure up to $500k in emergency government backing.",
-          url: "www.business-funding-guide.org"
-        },
-        insurance: {
-          title: "Lower Your Car Premium in Texas - Free 2-Min Rate Check",
-          desc: "Drivers saving an average of $620/year. Enter zip code to compare top 6 local insurers instantly.",
-          url: "www.texas-auto-rates.com"
-        },
-        legal: {
-          title: "Camp Lejeune Water Settlement Claims - Free Lawyer Consultation",
-          desc: "Veterans & family members diagnosed with cancer can claim substantial cash payouts. Act before deadline.",
-          url: "www.lejeunesettlement-legal.com"
-        },
-        tech: {
-          title: "Best Secure Cloud Hosting - Get 60% Off Business Plans",
-          desc: "Enterprise NVMe SSD hosting with automatic daily backups, DDoS protection & 24/7 expert developer support.",
-          url: "www.cloudstack-enterprise.com"
-        }
-      };
-
-      const ad = ads[niche] || ads.finance;
-      
-      adSlot.innerHTML = `
-        <div class="simulated-ad-title" onclick="alert('This is a simulated AdSense click. High CPC niche value: ${niche === 'legal' ? '$45.00' : '$15.00'}!')">
-          ${ad.title}
-        </div>
-        <div class="simulated-ad-desc">${ad.desc}</div>
-        <div class="simulated-ad-url">${ad.url}</div>
-      `;
-    }
-
-    // Bookmark Alert Handler
-    function addBookmarkAlert() {
-      alert("To bookmark this site, please press Ctrl + D (or Cmd + D on Mac) in your browser.");
-    }
-
-    // Subscribe Handler
-    function handleSubscribe() {
-      const emailInput = document.getElementById('newsletter-email-input');
-      const email = emailInput.value.trim();
-      if (!email) {
-        alert("Please enter a valid email address.");
-        return;
-      }
-      alert(`Thank you for subscribing! Free federal aid updates will be sent to: ${email}`);
-      emailInput.value = "";
-    }
-
-    // Cookie Consent Handlers
-    document.addEventListener('DOMContentLoaded', () => {
-      if (!localStorage.getItem('cookie_consent_accepted')) {
-        document.getElementById('cookie-consent-banner').style.display = 'flex';
-      }
-    });
-
-    function acceptCookies() {
-      localStorage.setItem('cookie_consent_accepted', 'true');
-      const banner = document.getElementById('cookie-consent-banner');
-      banner.style.opacity = '0';
-      setTimeout(() => {
-        banner.style.display = 'none';
-      }, 300);
-    }
-  </script>
-
-  <!-- California Cookie Consent Banner -->
-  <div class="cookie-banner" id="cookie-consent-banner" style="display: none;">
-    <p>We use cookies to personalize content and ads, to provide social media features and to analyze our traffic. We also share information about your use of our site with our advertising partners. By clicking "Accept", you consent to our cookies in accordance with CCPA guidelines. <a href="privacy.html" style="color: var(--primary); text-decoration: underline; font-weight: 500;">Learn more</a></p>
-    <button onclick="acceptCookies()">Accept</button>
-  </div>
 </body>
 </html>
